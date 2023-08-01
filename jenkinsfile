@@ -1,17 +1,17 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS=credentials('josiokoko')
+        DOCKERHUB_CREDENTIALS=credentials('oyinkoroye')
     }
     stages {
         stage("Git Checkout") {
             steps {
-                git branch: 'main', url: 'https://github.com/josiokoko/cicd.git'
+                git branch: 'main', url: 'https://github.com/Oyinbra7/cicd.git'
             }
         }
         stage("Docker Build") {
             steps{
-                sh "docker build -t josiokoko/timeserver ."
+                sh "docker build -t oyinkoroye/timeserver ."
             }
         }
         stage("Authenticate") {
@@ -23,8 +23,8 @@ pipeline {
         stage("Push to Registry") {
             steps{
                 script {
-                    sh 'docker tag josiokoko/timeserver docker.io/josiokoko/efosaserver:$BUILD_ID'
-                    sh 'docker push docker.io/josiokoko/efosaserver:$BUILD_ID'
+                    sh 'docker tag oyinkoroye/timeserver docker.io/oyinkoroye/efosaserver:$BUILD_ID'
+                    sh 'docker push docker.io/oyinkoroye/efosaserver:$BUILD_ID'
                 }
             }
         }
